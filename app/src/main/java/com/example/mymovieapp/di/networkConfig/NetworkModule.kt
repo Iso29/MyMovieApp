@@ -1,9 +1,11 @@
 package com.example.mymovieapp.di.networkConfig
 
+import android.content.Context
 import com.example.mymovieapp.data.datasource.remote.NetworkingManager
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
+import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
@@ -15,8 +17,10 @@ object NetworkModule {
 
     @Provides
     @Singleton
-    fun provideHttpClient(): OkHttpClient {
-        return NetworkingManager.buildOkHttpClient()
+    fun provideHttpClient(
+        @ApplicationContext context: Context
+    ): OkHttpClient {
+        return NetworkingManager.buildOkHttpClient(context)
     }
 
     @Provides

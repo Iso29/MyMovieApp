@@ -10,9 +10,12 @@ import javax.inject.Inject
 class MovieRepositoryImpl @Inject constructor(
     private val movieService: MovieService
 ) : MovieRepository, BaseRepository() {
-    override suspend fun getPopularMovies(): NetworkResult<MovieListDTO> {
+    override suspend fun getPopularMovies(
+        lang: String,
+        page: Int,
+    ): NetworkResult<MovieListDTO> {
         return handleNetworkResult {
-            movieService.getPopularMovies()
+            movieService.getPopularMovies(lang,page)
         }
     }
 }

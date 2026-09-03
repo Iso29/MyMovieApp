@@ -24,9 +24,32 @@ android {
 
     buildTypes {
         release {
+            buildConfigField(
+                "Boolean",
+                "IS_DEBUG",
+                "false"
+            )
+            buildConfigField(
+                "String",
+                "API_KEY",
+                ""
+            )
+            signingConfig = signingConfigs.getByName("debug")
             optimization {
                 enable = false
             }
+        }
+        debug {
+            buildConfigField(
+                "String",
+                "API_KEY",
+                "\"eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI0ZmFlNjc4ZTBiZjBjYTBjZTI2ZjY4ZWZhNjllMzMyOCIsIm5iZiI6MTY3NTc2Nzc3MS4wNzEsInN1YiI6IjYzZTIyZmRiNzczOTQxMDBlOTEwNmU5NiIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.Kqi0_h1m32c_M1ViB7U_9dgOP9_o7d5HDNTxg6pPDOY\""
+            )
+            buildConfigField(
+                "Boolean",
+                "IS_DEBUG",
+                "true"
+            )
         }
     }
     compileOptions {
@@ -35,6 +58,7 @@ android {
     }
 
     buildFeatures{
+        buildConfig = true
         viewBinding = true
     }
 }
@@ -73,4 +97,10 @@ dependencies {
 
     // Logging interceptor
     implementation("com.squareup.okhttp3:logging-interceptor:4.12.0")
+
+    implementation("com.github.bumptech.glide:glide:4.16.0")
+    ksp("com.github.bumptech.glide:compiler:4.16.0")
+
+    debugImplementation("com.github.chuckerteam.chucker:library:4.3.1")
+    releaseImplementation("com.github.chuckerteam.chucker:library-no-op:4.3.1")
 }
